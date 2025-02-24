@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.details.article.DetailsArticleFragment">
+
+    <TextView
+        android:id="@+id/tv_details_article_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details_article"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/electric_blue"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib_details_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:src="@android:drawable/btn_star"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_details_article_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_details_article_header" />
+
+    <TextView
+        android:id="@+id/tv_details_article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/created_on"
+        android:textColor="@color/electric_blue"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_details_article_header" />
+
+    <TextView
+        android:id="@+id/tv_details_article_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_s"
+        android:textColor="@color/electric_blue"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_details_article_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_details_article_date" />
+
+    <TextView
+        android:id="@+id/tv_details_article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mid_size_title"
+        android:textColor="@color/electric_blue"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:textSize="23sp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_details_article_date" />
+
+    <ImageView
+        android:id="@+id/iv_details_article"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/feedarticles_logo"
+        app:layout_constraintBottom_toTopOf="@+id/tv_details_article_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_details_article_title" />
+
+
+    <TextView
+        android:id="@+id/tv_details_article_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:maxLines="10"
+        android:text="@string/large_size_description"
+        android:textColor="@color/electric_blue"
+        android:textSize="18sp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_details_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+
+    <Button
+        android:id="@+id/btn_details_back"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:background="@color/electric_blue"
+        android:layout_marginBottom="40dp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

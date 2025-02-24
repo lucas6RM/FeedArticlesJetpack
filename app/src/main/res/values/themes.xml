@@ -1,9 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FeedArticlesJetpack" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.FeedArticlesJetpack" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/electric_blue</item>
+        <!-- Pour les versions antérieures à Lollipop -->
+        <item name="colorPrimaryDark">@color/electric_blue</item>
     </style>
 
-    <style name="Theme.FeedArticlesJetpack" parent="Base.Theme.FeedArticlesJetpack" />
+
+    <style name="Theme.FeedArticlesJetpack" parent="Base.Theme.FeedArticlesJetpack"/>
+
+
+
 </resources>
