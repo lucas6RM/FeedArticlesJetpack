@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.articles.MainFragment">
+    tools:context=".ui.main.articles.MainFragment"
+    android:background="@color/white">
 
     <ImageButton
         android:id="@+id/ib_main_add_article"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:src="@android:drawable/ic_input_add"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +45,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_articles"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -58,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

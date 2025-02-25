@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="electric_blue">#0099CC</color>
+    <color name="cat_sport_green">#C3FFC4</color>
+    <color name="cat_manga_blue">#ADF6FF</color>
+    <color name="cat_others_yellow">#FFFDCA</color>
 </resources>

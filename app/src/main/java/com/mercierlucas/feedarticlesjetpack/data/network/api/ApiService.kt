@@ -35,7 +35,7 @@ interface ApiService {
 
     @GET(ApiRoutes.GET_ALL_ARTICLES)
     suspend fun getAllArticles(
-        @Query("with_fav") withFav : Int = 1,
+        @Query("with_fav") withFav : Int,
         @Header("token") token: String?
     ) : Response<GetAllArticlesDto>?
 
@@ -43,7 +43,7 @@ interface ApiService {
     suspend fun getOneArticle(
         @Header("token") token : String?,
         @Path("id") id : Long,
-        @Query("with_fav") withFav : Int = 1,
+        @Query("with_fav") withFav : Int,
     ) : Response<GetOneArticleDto>?
 
     @POST(ApiRoutes.UPDATE_ARTICLE)

@@ -20,8 +20,9 @@
         <ImageView
             android:id="@+id/iv_item_view"
             android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,8 +32,8 @@
             android:id="@+id/tv_item_view_article_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="9"
-            android:maxEms="9"
+            android:ems="8"
+            android:maxEms="8"
             android:lines="1"
             android:maxLength="80"
             android:paddingHorizontal="5dp"
@@ -40,6 +41,7 @@
             android:textColor="@color/electric_blue"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@+id/iv_item_view"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,13 +49,14 @@
             android:id="@+id/tv_item_view_article_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="17"
-            android:maxEms="17"
+            android:ems="16"
+            android:maxEms="16"
             android:lines="1"
             android:text="@string/description"
             android:textColor="@color/electric_blue"
             android:paddingHorizontal="5dp"
             android:layout_marginBottom="15dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_item_view"
              />
@@ -72,6 +75,16 @@
             app:layout_constraintTop_toTopOf="@+id/tv_item_view_article_title" />
 
 
+        <ImageView
+            android:id="@+id/iv_item_view_star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/star_big_on"
+            android:visibility="gone"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_view_article_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_view_article_desc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
