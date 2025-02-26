@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.mercierlucas.feedarticlesjetpack.data.entity.dtos.Article
 import com.mercierlucas.feedarticlesjetpack.data.local.MyPrefs
 import com.mercierlucas.feedarticlesjetpack.data.network.repositories.ArticleRepository
+import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_TOUS
 import com.mercierlucas.feedarticlesjetpack.utils.WITH_FAV
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,14 @@ class MainViewModel @Inject constructor(
     private val _articleFilteredList : MutableLiveData<List<Article>> = MutableLiveData(emptyList())
     val articleFilteredList : LiveData<List<Article>> = _articleFilteredList
 
+    private val _isFilterFavActivated = MutableLiveData<Boolean>()
+    val isFilterFavActivated: LiveData<Boolean>
+        get() = _isFilterFavActivated
+
+    private val _currentCategory = MutableLiveData<Int>()
+    val currentCategory: LiveData<Int>
+        get() = _currentCategory
+
     private val _articleIdClicked = MutableLiveData<Long>()
     val articleIdClicked : LiveData<Long> = _articleIdClicked
 
@@ -49,6 +58,8 @@ class MainViewModel @Inject constructor(
         _articleFilteredList.value = _articleList.value
         _articleIdClicked.value = 0L
         _currentFragment.value = null
+        _isFilterFavActivated.value = false
+        _currentCategory.value = CATEGORY_TOUS
     }
 
     fun refreshArticles(){
@@ -69,17 +80,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun refreshfilteredArticles(categoryToFilter: Int) {
-
-            resetfilteredArticles()
-
-            val filteredList : MutableList<Article> = mutableListOf()
-            for(article in _articleList.value!!){
-                if(article.categorie == categoryToFilter)
-                    filteredList.add(article)
-            }
-            _articleFilteredList.value = filteredList.toList()
-    }
 
     fun clickOnAnArticleIsDone(articleId: Long, userId: Long) {
         if (userId == myPrefs.userId)
@@ -112,8 +112,39 @@ class MainViewModel @Inject constructor(
         _currentFragment.value = null
     }
 
-    fun setFilterByFavActivated(b: Boolean) {
+    fun setFilterByFavActivated(toggle: Boolean) {
+        _isFilterFavActivated.value = toggle
+    }
 
+    fun setCurrentCategory(categoryChanged: Int) {
+        _currentCategory.value = categoryChanged
+    }
+
+    fun refreshfilters() {
+        val filtFavOn = isFilterFavActivated.value
+        val categoryToFilter = currentCategory.value
+        val filteredList : MutableList<Article> = mutableListOf()
+
+        resetfilteredArticles()
+        if (categoryToFilter != CATEGORY_TOUS) {
+            for (article in _articleList.value!!) {
+                if (article.categorie == categoryToFilter)
+                    filteredList.add(article)
+            }
+        }
+        else
+            articleList.value?.let { filteredList.addAll(it) }
+
+        if (filtFavOn == false)
+            _articleFilteredList.value = filteredList.toList()
+        else {
+            val favFilteredList : MutableList<Article> = mutableListOf()
+            for (article in filteredList){
+                if(article.isFav == 1)
+                    favFilteredList.add(article)
+            }
+            _articleFilteredList.value = favFilteredList.toList()
+        }
 
     }
 

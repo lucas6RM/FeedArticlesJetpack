@@ -43,17 +43,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ib_main_add_article" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_articles"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ib_main_add_article"
-        app:layout_constraintBottom_toTopOf="@+id/rg_main"/>
+        app:layout_constraintBottom_toTopOf="@+id/rg_main"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_articles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
     <RadioGroup

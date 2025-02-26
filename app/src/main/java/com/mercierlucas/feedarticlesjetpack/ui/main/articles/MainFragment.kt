@@ -19,6 +19,7 @@ import com.mercierlucas.feedarticlesjetpack.ui.main.articles.Destination.*
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_DIVERS
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_MANGA
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_SPORT
+import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_TOUS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,38 +48,41 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
+
+
         articleAdapter = ArticleAdapter (onArticleClicked = {articleId,userId ->
             mainViewModel.clickOnAnArticleIsDone(articleId,userId)
         })
 
         with(binding){
 
+            swiperefresh.setOnRefreshListener {
+                refreshMainMenu()
+                swiperefresh.isRefreshing = false
+            }
+
             ibMainLogout.setOnClickListener{
                 mainViewModel.clearMySharedPreferences()
                 navController.navigate(R.id.action_mainFragment_to_loginFragment)
             }
 
-            // ---- Filtre ----
-            rgMain.setOnCheckedChangeListener{_,checkedId ->
+
+            rgMain.setOnCheckedChangeListener{ _,checkedId ->
                 when(checkedId){
-                    R.id.rb_sport  -> mainViewModel
-                        .refreshfilteredArticles(CATEGORY_SPORT)
-                    R.id.rb_manga  -> mainViewModel
-                        .refreshfilteredArticles(CATEGORY_MANGA)
-                    R.id.rb_divers -> mainViewModel
-                        .refreshfilteredArticles(CATEGORY_DIVERS)
-                    R.id.rb_tous   -> mainViewModel.refreshArticles()
+                    rbSport.id  -> mainViewModel.setCurrentCategory(CATEGORY_SPORT)
+                    rbManga.id  -> mainViewModel.setCurrentCategory(CATEGORY_MANGA)
+                    rbDivers.id -> mainViewModel.setCurrentCategory(CATEGORY_DIVERS)
+                    rbTous.id   -> mainViewModel.setCurrentCategory(CATEGORY_TOUS)
                     else -> {}
                 }
             }
 
-            cbMainFavorites.setOnCheckedChangeListener{_,_ ->
+            cbMainFavorites.setOnCheckedChangeListener{ _,_ ->
                 if(cbMainFavorites.isChecked == true)
                     mainViewModel.setFilterByFavActivated(true)
                 else
                     mainViewModel.setFilterByFavActivated(false)
-        }
-
+            }
 
             rvArticles.apply {
                 layoutManager = LinearLayoutManager(requireActivity())
@@ -106,6 +110,15 @@ class MainFragment : Fragment() {
                 articleAdapter.submitList(it)
             }
 
+            currentCategory.observe(viewLifecycleOwner){
+                mainViewModel.refreshfilters()
+            }
+            isFilterFavActivated.observe(viewLifecycleOwner){
+                mainViewModel.refreshfilters()
+            }
+
+
+
             articleIdClicked.observe(viewLifecycleOwner)
             { articleId ->
                 val destination = mainViewModel.currentFragment.value
@@ -129,6 +142,18 @@ class MainFragment : Fragment() {
                 mainViewModel.resetfilteredArticles()
             }
         }
+    }
+
+    private fun refreshMainMenu() {
+        mainViewModel.refreshArticles()
+        with(binding){
+            rgMain.check(rbTous.id)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshMainMenu()
     }
 
 

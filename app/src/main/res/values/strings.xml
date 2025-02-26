@@ -29,4 +29,5 @@
     <string name="back">Retour</string>
     <string name="update">Mettre à jour</string>
     <string name="delete">Supprimer</string>
+    <string name="menu_refresh">Refresh Menu\n</string>
 </resources>
