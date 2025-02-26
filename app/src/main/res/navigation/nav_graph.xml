@@ -71,6 +71,10 @@
         android:name="com.mercierlucas.feedarticlesjetpack.ui.details.article.DetailsArticleFragment"
         android:label="fragment_details_article"
         tools:layout="@layout/fragment_details_article" >
+        <argument
+            android:name="articleId"
+            app:argType="long"
+            android:defaultValue="0L" />
         <action
             android:id="@+id/action_detailsArticleFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -83,5 +87,9 @@
         <action
             android:id="@+id/action_editArticleFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="articleId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>

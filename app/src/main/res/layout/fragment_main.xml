@@ -6,25 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.articles.MainFragment"
-    android:background="@color/white">
+    >
 
     <ImageButton
         android:id="@+id/ib_main_add_article"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/transparent"
         android:src="@android:drawable/ic_input_add"
         android:layout_marginTop="40dp"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ib_main_favorites"
+    <CheckBox
+        android:id="@+id/cb_main_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:src="@android:drawable/btn_star"
+        android:background="@color/transparent"
+        android:button="@android:drawable/btn_star"
         app:layout_constraintBottom_toBottomOf="@+id/ib_main_add_article"
         app:layout_constraintEnd_toStartOf="@+id/ib_main_logout"
         app:layout_constraintStart_toEndOf="@+id/ib_main_add_article"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:background="@color/white"
+        android:background="@color/transparent"
         android:src="@android:drawable/ic_lock_power_off"
         app:layout_constraintBottom_toBottomOf="@+id/ib_main_add_article"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ib_main_add_article"

@@ -46,13 +46,13 @@ class RegisterFragment : Fragment() {
         navController = findNavController()
 
         registerViewModel.apply {
-            errorMessage.observe(viewLifecycleOwner){
+            messageFromRegisterResponse.observe(viewLifecycleOwner){
                 when(it){
-                    "5" -> context?.showToast("login déjà utilisé")
-                    "1" -> context?.showToast("nouveau compte créé")
-                    "0" -> context?.showToast("nouveau compte non créé")
-                    "-1" -> context?.showToast("problème de paramètre")
-                    else -> return@observe
+                     "5"  -> context?.showToast("login déjà utilisé")
+                     "1"  -> context?.showToast("nouveau compte créé")
+                     "0"  -> context?.showToast("nouveau compte non créé")
+                    "-1"  -> context?.showToast("problème de paramètre")
+                    else  -> return@observe
                 }
             }
             isResponseCorrect.observe(viewLifecycleOwner){

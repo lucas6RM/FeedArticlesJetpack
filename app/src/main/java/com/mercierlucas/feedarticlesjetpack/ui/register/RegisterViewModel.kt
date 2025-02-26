@@ -1,5 +1,7 @@
 package com.mercierlucas.feedarticlesjetpack.ui.register
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,33 +24,31 @@ class RegisterViewModel @Inject constructor(
     val isResponseCorrect: LiveData<Boolean>
         get() = _isResponseCorrect
 
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage : LiveData<String?>
-        get() = _errorMessage
+    private val _messageFromRegisterResponse = MutableLiveData<String?>()
+    val messageFromRegisterResponse : LiveData<String?>
+        get() = _messageFromRegisterResponse
 
     init {
         _isResponseCorrect.value = false
     }
 
     fun registerIn(registerDto: RegisterDto){
-
         viewModelScope.launch {
             val responseRegister = withContext(Dispatchers.IO) {
                 authRepository.registerUserAndGetToken(registerDto)
             }
             val body = responseRegister?.body()
             when{
-                responseRegister == null -> _errorMessage.value = "Pas de réponse Serveur"
+                responseRegister == null -> Log.e(ContentValues.TAG,"Pas de reponse du serveur")
                 responseRegister.isSuccessful && body != null ->{
                     myPrefs.apply {
                         token = body.token
                         userId = body.id
                     }
                     _isResponseCorrect.value = true
+                    _messageFromRegisterResponse.value = body.status.toString()
                 }
-                else -> {
-                    _errorMessage.value = body?.status.toString()
-                }
+                else -> responseRegister.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
     }

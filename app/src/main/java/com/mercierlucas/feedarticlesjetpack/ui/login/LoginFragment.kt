@@ -10,10 +10,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mercierlucas.feedarticles.Utils.showToast
 import com.mercierlucas.feedarticlesjetpack.R
-import com.mercierlucas.feedarticlesjetpack.data.local.MyPrefs
 import com.mercierlucas.feedarticlesjetpack.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -43,7 +41,7 @@ class LoginFragment : Fragment() {
         navController = findNavController()
 
         loginViewModel.apply {
-            errorMessage.observe(viewLifecycleOwner){
+            messageFromLoginResponse.observe(viewLifecycleOwner){
                 when(it){
                      "5" -> context?.showToast("authentifié mais token inchangé")
                      "1" -> context?.showToast("authentifié avec un nouveau token")

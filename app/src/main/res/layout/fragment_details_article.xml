@@ -15,17 +15,17 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/electric_blue"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ib_details_favorites"
+    <CheckBox
+        android:id="@+id/cb_details_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:src="@android:drawable/btn_star"
+        android:background="@color/transparent"
+        android:button="@android:drawable/btn_star"
         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_details_article_header"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@string/created_on"
         android:textColor="@color/electric_blue"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_details_article_header" />
@@ -69,10 +69,10 @@
 
     <ImageView
         android:id="@+id/iv_details_article"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         android:src="@drawable/feedarticles_logo"
-        app:layout_constraintBottom_toTopOf="@+id/tv_details_article_description"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_details_article_title" />
@@ -83,15 +83,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:gravity="start|top"
         android:maxLines="10"
         android:text="@string/large_size_description"
         android:textColor="@color/electric_blue"
         android:textSize="18sp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_details_back"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/iv_details_article" />
 
     <Button
         android:id="@+id/btn_details_back"
@@ -104,7 +104,7 @@
         android:textSize="18sp"
         android:textAllCaps="false"
         android:background="@color/electric_blue"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginHorizontal="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
 

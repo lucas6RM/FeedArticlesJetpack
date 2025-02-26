@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class ArticleRepository @Inject constructor(private val apiService: ApiService){
 
-    suspend fun getAllArticles(withFav: Int,token: String?)
+    suspend fun getAllArticles(withFav: Int, token: String?)
         = apiService.getAllArticles(withFav, token)
 
     suspend fun getOneArticle(token: String?, id: Long, withFav: Int)

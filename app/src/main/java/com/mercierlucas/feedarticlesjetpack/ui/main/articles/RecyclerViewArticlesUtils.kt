@@ -3,6 +3,8 @@ package com.mercierlucas.feedarticlesjetpack.ui.main.articles
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,10 +14,9 @@ import com.mercierlucas.feedarticlesjetpack.data.entity.dtos.Article
 import com.mercierlucas.feedarticlesjetpack.databinding.ArticleItemViewBinding
 import com.mercierlucas.feedarticlesjetpack.utils.formatApiDate
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
 
 
-class ArticleAdapter : ListAdapter<Article, ArticleViewHolder>(ArticleDiffCallback){
+class ArticleAdapter(val onArticleClicked : (Long, Long) -> Unit) : ListAdapter<Article, ArticleViewHolder>(ArticleDiffCallback){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
 
         val itemView = LayoutInflater.from(parent.context)
@@ -34,26 +35,34 @@ class ArticleAdapter : ListAdapter<Article, ArticleViewHolder>(ArticleDiffCallba
         val othersCard = holder.itemView.resources.getDrawable(R.drawable.card_others)
         val blankCard = holder.itemView.resources.getDrawable(R.drawable.card_blank)
 
-        holder.apply {
-            with(binding){
-                ivItemView.let {
-                    Picasso.get()
-                        .load(article.urlImage.ifEmpty { "image vide" })
-                        .placeholder(R.drawable.feedarticles_logo)
-                        .error(com.google.android.material.R.drawable.mtrl_ic_error)
-                        .into(this.ivItemView)
-                }
-                tvItemViewArticleTitle.text = article.titre
-                tvItemViewArticleDesc.text = article.descriptif
-                tvItemViewArticleDate.text = formatApiDate(article.createdAt)
+        holder.binding.apply {
 
-                when(article.categorie){
-                    1    -> cvItemView.background = sportCard
-                    2    -> cvItemView.background = mangaCard
-                    3    -> cvItemView.background = othersCard
-                    else -> clItemView.background = blankCard
-                }
+            ivItemView.let {
+                Picasso.get()
+                    .load(article.urlImage.ifEmpty { "image vide" })
+                    .placeholder(R.drawable.feedarticles_logo)
+                    .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                    .into(this.ivItemView)
             }
+            tvItemViewArticleTitle.text = article.titre
+            tvItemViewArticleDesc.text = article.descriptif
+            tvItemViewArticleDate.text = formatApiDate(article.createdAt)
+
+            when(article.categorie){
+                1    -> cvItemView.background = sportCard
+                2    -> cvItemView.background = mangaCard
+                3    -> cvItemView.background = othersCard
+                else -> clItemView.background = blankCard
+            }
+
+            clItemView.setOnClickListener {
+                onArticleClicked.invoke(article.id,article.idU)
+            }
+
+            if (article.isFav == 1)
+                ivItemViewStar.visibility = VISIBLE
+            else
+                ivItemViewStar.visibility = GONE
         }
     }
 

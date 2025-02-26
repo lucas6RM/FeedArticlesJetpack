@@ -1,5 +1,7 @@
 package com.mercierlucas.feedarticlesjetpack.ui.create.article
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,9 +26,9 @@ class CreaArticleViewModel @Inject constructor(
     val isResponseCorrect: LiveData<Boolean>
         get() = _isResponseCorrect
 
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage : LiveData<String?>
-        get() = _errorMessage
+    private val _messageFromAddNewArticleResponse = MutableLiveData<String?>()
+    val messageFromAddNewArticleResponse : LiveData<String?>
+        get() = _messageFromAddNewArticleResponse
 
     init {
         _isResponseCorrect.value = false
@@ -49,13 +51,12 @@ class CreaArticleViewModel @Inject constructor(
             }
             val body = responseAddNewArticle?.body()
             when{
-                responseAddNewArticle == null -> _errorMessage.value = "Pas de reponse Serveur"
+                responseAddNewArticle == null -> Log.e(ContentValues.TAG,"Pas de reponse du serveur")
                 responseAddNewArticle.isSuccessful && body != null -> {
+                    _messageFromAddNewArticleResponse.value = body.status.toString()
                     _isResponseCorrect.value = true
                 }
-                else -> {
-                    _errorMessage.value = body?.status.toString()
-                }
+                else -> responseAddNewArticle.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
     }

@@ -46,7 +46,7 @@ class CreaArticleFragment : Fragment() {
         navController = findNavController()
 
         creaArticleViewModel.apply {
-            errorMessage.observe(viewLifecycleOwner){
+            messageFromAddNewArticleResponse.observe(viewLifecycleOwner){
                 when(it){
                      "1" -> context?.showToast("article cree")
                      "0" -> context?.showToast("pas de creation")
@@ -66,9 +66,9 @@ class CreaArticleFragment : Fragment() {
         with(binding) {
             rgCreaArticle.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
-                    R.id.rb_crea_art_sport -> articleCategory = CATEGORY_SPORT
-                    R.id.rb_crea_art_manga -> articleCategory = CATEGORY_MANGA
-                    R.id.rb_crea_art_divers -> articleCategory = CATEGORY_DIVERS
+                    rbCreaArtSport.id  -> articleCategory = CATEGORY_SPORT
+                    rbCreaArtManga.id  -> articleCategory = CATEGORY_MANGA
+                    rbCreaArtDivers.id -> articleCategory = CATEGORY_DIVERS
                     else -> {}
                 }
             }

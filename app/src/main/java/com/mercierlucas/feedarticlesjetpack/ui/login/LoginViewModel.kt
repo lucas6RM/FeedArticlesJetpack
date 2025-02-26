@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,35 +23,31 @@ class LoginViewModel @Inject constructor(
     val isResponseCorrect: LiveData<Boolean>
         get() = _isResponseCorrect
 
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage : LiveData<String?>
-        get() = _errorMessage
+    private val _messageFromLoginResponse = MutableLiveData<String?>()
+    val messageFromLoginResponse : LiveData<String?>
+        get() = _messageFromLoginResponse
 
     init {
         _isResponseCorrect.value = false
     }
 
     fun signIn(login: String, mdp : String){
-
         viewModelScope.launch {
             val responseLogin = withContext(Dispatchers.IO) {
                 authRepository.loginUserAndGetToken(login, mdp)
             }
             val body = responseLogin?.body()
-
             when{
-                responseLogin == null -> _errorMessage.value = "Pas de réponse Serveur"
+                responseLogin == null -> Log.e(ContentValues.TAG,"Pas de reponse du serveur")
                 responseLogin.isSuccessful && body != null ->{
                     myPrefs.apply {
                         token = body.token
                         userId = body.id
                     }
                     _isResponseCorrect.value = true
+                    _messageFromLoginResponse.value = body.status.toString()
                 }
-                else -> {
-                    _errorMessage.value = body?.status.toString()
-                }
-
+                else -> responseLogin.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
     }

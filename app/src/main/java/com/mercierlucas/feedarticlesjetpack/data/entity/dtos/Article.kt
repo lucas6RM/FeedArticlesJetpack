@@ -11,9 +11,9 @@ data class Article(
     @Json(name = "descriptif")
     val descriptif: String,
     @Json(name = "id")
-    val id: Int,
+    val id: Long,
     @Json(name = "id_u")
-    val idU: Int,
+    val idU: Long,
     @Json(name = "is_fav")
     val isFav: Int,
     @Json(name = "titre")
