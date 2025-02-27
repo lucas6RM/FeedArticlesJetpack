@@ -96,16 +96,13 @@ class EditArticleViewModel @Inject constructor(
                     Log.e(ContentValues.TAG,"Pas de reponse du serveur")
 
                 responseUpdate.isSuccessful && body != null -> {
+                    if (body.status.toString() == "1")
+                        _isResponseCorrect.value = true
                     _messageFromUpdateArticleResponse.value = body.status.toString()
-                    _isResponseCorrect.value = true
                 }
                 else -> responseUpdate.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
-    }
-
-    fun resetIsResponseCorrect() {
-        _isResponseCorrect.value = false
     }
 
     fun deleteArticle(articleId: Long) {
@@ -119,8 +116,9 @@ class EditArticleViewModel @Inject constructor(
                     Log.e(ContentValues.TAG,"Pas de reponse du serveur")
 
                 responseDelete.isSuccessful && body != null -> {
+                    if (body.status.toString() == "1")
+                        _isResponseCorrect.value = true
                     _messageFromDeleteArticleResponse.value = body.status.toString()
-                    _isResponseCorrect.value = true
                 }
                 else -> responseDelete.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }

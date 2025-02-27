@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FeedArticlesJetpack</string>
+    <string name="feed_articles">Feed Articles</string>
+    <string name="connect_yourself">Connectez-vous</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="connect">Se connecter</string>
+    <string name="no_account_register">Pas de compte ? Inscrivez-vous !</string>
+    <string name="confirm_password">Confirmation password</string>
+    <string name="new_account">Nouveau compte</string>
+    <string name="subscribe">S\'inscrire</string>
+    <string name="all">Tout</string>
+    <string name="sport">Sport</string>
+    <string name="manga">Manga</string>
+    <string name="others">Divers</string>
+    <string name="description">description</string>
+    <string name="title">Titre</string>
+    <string name="date">date</string>
+    <string name="new_article">Nouvel article</string>
+    <string name="content">Contenu</string>
+    <string name="save">Enregistrer</string>
+    <string name="edit_article">Edition Article</string>
+    <string name="image_url">Image URL</string>
+    <string name="details_article">Détails Article</string>
+    <string name="created_on">Créé le %s</string>
+    <string name="category_s">Catégorie : %s</string>
+    <string name="mid_size_title">Un titre qui peut être moyennement long</string>
+    <string name="large_size_description">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop "</string>
+    <string name="back">Retour</string>
+    <string name="update">Mettre à jour</string>
+    <string name="delete">Supprimer</string>
+    <string name="menu_refresh">Refresh Menu\n</string>
+    <string name="response_ok">Réponse OK</string>
+    <string name="unauthorized">Opération non autorisée</string>
+    <string name="error_param">Problème de paramètre</string>
+    <string name="error_connection_db">Erreur de connection BDD</string>
+    <string name="status_favorite_changed">Le status de favori a changé</string>
+    <string name="status_favorite_not_changed">Le status de favori n\'a pas changé</string>
+    <string name="article_created">Article créé</string>
+    <string name="article_not_created">Article non créé</string>
+    <string name="empty_required_fields">Certains champs requis sont vides</string>
+    <string name="no_response_from_server">Pas de réponse serveur</string>
+    <string name="article_modified">Article modifié</string>
+    <string name="article_not_modified">Article non modifié</string>
+    <string name="ids_are_different">Les ids sont différents</string>
+    <string name="article_deleted">Article supprimé</string>
+    <string name="article_not_deleted">Article non supprimé</string>
+    <string name="token_security_problem">Le token n\'a pas changé (problème de sécurité)</string>
+    <string name="ok_new_token_delivered">Identification OK. Nouveau token</string>
+    <string name="user_unknown">Utilisateur inconnu</string>
+    <string name="login_or_password_empty">Login ou mot de passe vide</string>
+    <string name="login_already_used">Login déjà utilisé</string>
+    <string name="new_account_created">Nouveau compte créé</string>
+    <string name="new_account_not_created">Nouveau compte non créé</string>
+    <string name="error_on_confirmed_password">Erreur sur la confirmation mot de passe</string>
+
+
+</resources>

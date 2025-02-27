@@ -43,10 +43,10 @@ class LoginFragment : Fragment() {
         loginViewModel.apply {
             messageFromLoginResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "5" -> context?.showToast("authentifié mais token inchangé")
-                     "1" -> context?.showToast("authentifié avec un nouveau token")
-                     "0" -> context?.showToast("user inconnu (mauvais login/mdp)")
-                    "-1" -> context?.showToast("problème de paramètre")
+                     "5" -> context?.showToast(getString(R.string.token_security_problem))
+                     "1" -> context?.showToast(getString(R.string.ok_new_token_delivered))
+                     "0" -> context?.showToast(getString(R.string.user_unknown))
+                    "-1" -> context?.showToast(getString(R.string.error_param))
                     else -> return@observe
                 }
             }
@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                 if(login.isNotEmpty() && password.isNotEmpty())
                     loginViewModel.signIn(login,password)
                 else
-                    context?.showToast("login ou mot de passe vide")
+                    context?.showToast(getString(R.string.login_or_password_empty))
             }
         }
 

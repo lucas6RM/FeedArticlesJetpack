@@ -44,17 +44,12 @@ class LoginViewModel @Inject constructor(
                         token = body.token
                         userId = body.id
                     }
-                    _isResponseCorrect.value = true
+                    if (body.status.toString() == "1")
+                        _isResponseCorrect.value = true
                     _messageFromLoginResponse.value = body.status.toString()
                 }
                 else -> responseLogin.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
     }
-
-    fun resetIsResponseCorrect() {
-        _isResponseCorrect.value = false
-    }
-
-
 }

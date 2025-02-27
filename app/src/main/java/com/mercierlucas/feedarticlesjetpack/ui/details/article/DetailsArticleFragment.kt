@@ -55,29 +55,29 @@ class DetailsArticleFragment : Fragment() {
             getArticleById(articleId)
             messageFromGetArticleResponse.observe(viewLifecycleOwner){
                 when(it){
-                    "ok" -> Log.i(ContentValues.TAG, "Reponse OK")
-                    "unauthorized" -> Log.i(ContentValues.TAG, "probleme d'autorisation ")
-                    "error_param" -> Log.i(ContentValues.TAG, "probleme de parametre")
-                    else -> Log.i(ContentValues.TAG, "erreur de connection database")
+                    "ok" -> Log.i(ContentValues.TAG, getString(R.string.response_ok))
+                    "unauthorized" -> Log.i(ContentValues.TAG, getString(R.string.unauthorized))
+                    "error_param" -> Log.i(ContentValues.TAG, getString(R.string.error_param))
+                    else -> Log.i(ContentValues.TAG, getString(R.string.error_connection_db))
                 }
             }
             messageFromAddFavoriteResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "1" -> context?.showToast("statut de favori changé")
-                     "0" -> context?.showToast("statut de favori inchangé")
-                    "-1" -> context?.showToast("probleme de parametre")
-                    "-5" -> context?.showToast("opération non autorisée")
+                     "1" -> context?.showToast(getString(R.string.status_favorite_changed))
+                     "0" -> context?.showToast(getString(R.string.status_favorite_not_changed))
+                    "-1" -> context?.showToast(getString(R.string.error_param))
+                    "-5" -> context?.showToast(getString(R.string.unauthorized))
                 }
             }
 
             articleToDisplay.observe(viewLifecycleOwner){ article ->
                 binding.apply {
                     tvDetailsArticleTitle.text = article.titre
-                    tvDetailsArticleDate.text = "Créé le ${formatApiDate(article.createdAt)}"
+                    tvDetailsArticleDate.text = getString(R.string.created_on,formatApiDate(article.createdAt))
                     when (article.categorie) {
-                        CATEGORY_SPORT -> tvDetailsArticleCategory.text = "Catégorie : Sport"
-                        CATEGORY_MANGA -> tvDetailsArticleCategory.text = "Catégorie : Manga"
-                        CATEGORY_DIVERS -> tvDetailsArticleCategory.text = "Catégorie : Divers"
+                        CATEGORY_SPORT -> tvDetailsArticleCategory.text = getString(R.string.category_s,getString(R.string.sport))
+                        CATEGORY_MANGA -> tvDetailsArticleCategory.text = getString(R.string.category_s,getString(R.string.manga))
+                        CATEGORY_DIVERS -> tvDetailsArticleCategory.text = getString(R.string.category_s,getString(R.string.others))
                     }
                     tvDetailsArticleCategory.text
                     if (article.urlImage.isNotEmpty())

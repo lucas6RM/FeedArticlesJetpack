@@ -57,28 +57,28 @@ class EditArticleFragment : Fragment() {
             getArticleById(articleId)
             messageFromGetArticleResponse.observe(viewLifecycleOwner) {
                 when (it) {
-                    "ok" -> Log.i(ContentValues.TAG, "Reponse OK")
-                    "unauthorized" -> Log.i(ContentValues.TAG, "probleme d'autorisation ")
-                    "error_param" -> Log.i(ContentValues.TAG, "probleme de parametre")
-                    else -> Log.i(ContentValues.TAG, "erreur de connection database")
+                    "ok" -> Log.i(ContentValues.TAG, getString(R.string.response_ok))
+                    "unauthorized" -> Log.i(ContentValues.TAG, getString(R.string.unauthorized))
+                    "error_param" -> Log.i(ContentValues.TAG, getString(R.string.error_param))
+                    else -> Log.i(ContentValues.TAG, getString(R.string.error_connection_db))
                 }
             }
             messageFromUpdateArticleResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "1" -> context?.showToast("article modifié")
-                     "0" -> context?.showToast("pas de modification")
-                    "-1" -> context?.showToast("probleme de parametre")
-                    "-2" -> context?.showToast("les ids (path et dto) sont différents")
-                    "-5" -> context?.showToast("modification non autorisée")
+                     "1" -> context?.showToast(getString(R.string.article_modified))
+                     "0" -> context?.showToast(getString(R.string.article_not_modified))
+                    "-1" -> context?.showToast(getString(R.string.error_param))
+                    "-2" -> context?.showToast(getString(R.string.ids_are_different))
+                    "-5" -> context?.showToast(getString(R.string.unauthorized))
                     else -> return@observe
                 }
             }
             messageFromDeleteArticleResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "1" -> context?.showToast("article supprimé")
-                     "0" -> context?.showToast("pas de suppression")
-                    "-1" -> context?.showToast("probleme de parametre")
-                    "-5" -> context?.showToast("suppression non autorisée")
+                     "1" -> context?.showToast(getString(R.string.article_deleted))
+                     "0" -> context?.showToast(getString(R.string.article_not_deleted))
+                    "-1" -> context?.showToast(getString(R.string.error_param))
+                    "-5" -> context?.showToast(getString(R.string.unauthorized))
                     else -> return@observe
                 }
             }
@@ -123,10 +123,21 @@ class EditArticleFragment : Fragment() {
                     if (title.isNotEmpty() && content.isNotEmpty())
                         editViewModel.updateArticle(articleId,title,content,imageUrl,articleCategory)
                     else
-                        context?.showToast("Champs manquant à remplir")
+                        context?.showToast(getString(R.string.empty_required_fields))
                 }
                 btnEditDelete.setOnClickListener {
                     editViewModel.deleteArticle(articleId)
+                }
+
+                etEditArticleImageUrl.setOnFocusChangeListener{ _,_ ->
+                    imageUrl = etEditArticleImageUrl.text.toString().trim()
+                    if(imageUrl.isNotEmpty())
+                        Picasso
+                            .get()
+                            .load(imageUrl)
+                            .placeholder(R.drawable.feedarticles_logo)
+                            .error(R.drawable.feedarticles_logo)
+                            .into(ivEditArticle)
                 }
             }
         }

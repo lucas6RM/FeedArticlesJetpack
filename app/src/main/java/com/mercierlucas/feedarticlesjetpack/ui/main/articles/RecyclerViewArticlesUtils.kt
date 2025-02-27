@@ -39,7 +39,7 @@ class ArticleAdapter(val onArticleClicked : (Long, Long) -> Unit) : ListAdapter<
 
             ivItemView.let {
                 Picasso.get()
-                    .load(article.urlImage.ifEmpty { "image vide" })
+                    .load(article.urlImage.ifEmpty { "empty image" })
                     .placeholder(R.drawable.feedarticles_logo)
                     .error(R.drawable.feedarticles_logo)
                     .into(this.ivItemView)
@@ -65,8 +65,6 @@ class ArticleAdapter(val onArticleClicked : (Long, Long) -> Unit) : ListAdapter<
                 ivItemViewStar.visibility = GONE
         }
     }
-
-
 }
 
 object ArticleDiffCallback : DiffUtil.ItemCallback<Article>() {
@@ -78,7 +76,7 @@ object ArticleDiffCallback : DiffUtil.ItemCallback<Article>() {
         return oldItem == newItem
     }
 }
+
 class ArticleViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     val binding = ArticleItemViewBinding.bind(itemView)
-
 }

@@ -48,10 +48,10 @@ class CreaArticleFragment : Fragment() {
         creaArticleViewModel.apply {
             messageFromAddNewArticleResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "1" -> context?.showToast("article cree")
-                     "0" -> context?.showToast("pas de creation")
-                    "-1" -> context?.showToast("probleme de parametre")
-                    "-5" -> context?.showToast("creation non autorisée")
+                     "1" -> context?.showToast(getString(R.string.article_created))
+                     "0" -> context?.showToast(getString(R.string.article_not_created))
+                    "-1" -> context?.showToast(getString(R.string.error_param))
+                    "-5" -> context?.showToast(getString(R.string.unauthorized))
                     else -> return@observe
                 }
             }
@@ -84,9 +84,9 @@ class CreaArticleFragment : Fragment() {
                         articleCategory
                     )
                 else
-                    context?.showToast("Champs manquant à remplir")
+                    context?.showToast(getString(R.string.empty_required_fields))
             }
-            etCreaArticleImageUrl.setOnFocusChangeListener{_,_ ->
+            etCreaArticleImageUrl.setOnFocusChangeListener{ _,_ ->
                 imageUrl = etCreaArticleImageUrl.text.toString().trim()
                 if(imageUrl.isNotEmpty())
                     Picasso

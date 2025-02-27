@@ -54,10 +54,6 @@ class MainViewModel @Inject constructor(
 
 
     init {
-
-        refreshArticles()
-
-
         _articleFilteredList.value = _articleList.value
         _articleIdClicked.value = 0L
         _currentFragment.value = null
@@ -83,7 +79,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
     fun clickOnAnArticleIsDone(articleId: Long, userId: Long) {
         if (userId == myPrefs.userId)
             goToEditArticle()
@@ -107,7 +102,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun resetfilteredArticles() {
+    fun resetFilteredArticles() {
         _articleFilteredList.value = _articleList.value
     }
 
@@ -123,12 +118,12 @@ class MainViewModel @Inject constructor(
         _currentCategory.value = categoryChanged
     }
 
-    fun refreshfilters() {
-        val filtFavOn = isFilterFavActivated.value
+    fun refreshFilters() {
+        val buttonFavOn = isFilterFavActivated.value
         val categoryToFilter = currentCategory.value
         val filteredList : MutableList<Article> = mutableListOf()
 
-        resetfilteredArticles()
+        resetFilteredArticles()
         if (categoryToFilter != CATEGORY_TOUS) {
             for (article in _articleList.value!!) {
                 if (article.categorie == categoryToFilter)
@@ -138,9 +133,7 @@ class MainViewModel @Inject constructor(
         else
             articleList.value?.let { filteredList.addAll(it) }
 
-        if (filtFavOn == false)
-            _articleFilteredList.value = filteredList.toList()
-        else {
+        if (buttonFavOn == true ){
             val favFilteredList : MutableList<Article> = mutableListOf()
             for (article in filteredList){
                 if(article.isFav == 1)
@@ -148,7 +141,8 @@ class MainViewModel @Inject constructor(
             }
             _articleFilteredList.value = favFilteredList.toList()
         }
-
+        else
+            _articleFilteredList.value = filteredList.toList()
     }
 
 

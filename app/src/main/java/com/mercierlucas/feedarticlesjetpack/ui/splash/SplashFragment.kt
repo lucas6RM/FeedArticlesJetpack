@@ -19,8 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
 
-    @Inject
-    lateinit var myPrefs: MyPrefs
 
     private val splashViewModel: SplashViewModel by viewModels()
     private lateinit var navController: NavController
@@ -31,7 +29,6 @@ class SplashFragment : Fragment() {
     ): View {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

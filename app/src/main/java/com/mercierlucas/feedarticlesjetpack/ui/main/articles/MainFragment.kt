@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,6 @@ import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_MANGA
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_SPORT
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_TOUS
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -42,8 +40,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater,container,false)
-
-
         return binding.root
     }
 
@@ -68,16 +64,12 @@ class MainFragment : Fragment() {
                 navController.navigate(R.id.action_mainFragment_to_loginFragment)
             }
 
-
             rgMain.setOnCheckedChangeListener{ _,checkedId ->
-                checkCurrentCategory(checkedId)
+                checkCurrentCategoryChecked(checkedId)
             }
 
             cbMainFavorites.setOnCheckedChangeListener{ _,_ ->
-                if(cbMainFavorites.isChecked == true)
-                    mainViewModel.setFilterByFavActivated(true)
-                else
-                    mainViewModel.setFilterByFavActivated(false)
+                checkIfFavoritesIsChecked()
             }
 
             rvArticles.apply {
@@ -90,15 +82,13 @@ class MainFragment : Fragment() {
             }
         }
 
-
         mainViewModel.apply {
-
             messageFromGetAllPatientsResponse.observe(viewLifecycleOwner){
                 when(it){
-                    "ok"           -> Log.i(ContentValues.TAG, "Reponse OK")
-                    "unauthorized" -> Log.i(ContentValues.TAG, "probleme d'autorisation ")
-                    "error_param"  -> Log.i(ContentValues.TAG, "probleme de parametre")
-                    else           -> Log.i(ContentValues.TAG, "erreur de connection database")
+                    "ok"           -> Log.i(ContentValues.TAG, getString(R.string.response_ok))
+                    "unauthorized" -> Log.i(ContentValues.TAG, getString(R.string.unauthorized))
+                    "error_param"  -> Log.i(ContentValues.TAG, getString(R.string.error_param))
+                    else           -> Log.i(ContentValues.TAG, getString(R.string.error_connection_db))
                 }
             }
 
@@ -107,17 +97,16 @@ class MainFragment : Fragment() {
             }
 
             currentCategory.observe(viewLifecycleOwner){
-                mainViewModel.refreshfilters()
+                mainViewModel.refreshFilters()
             }
 
             isFilterFavActivated.observe(viewLifecycleOwner){
-                mainViewModel.refreshfilters()
+                mainViewModel.refreshFilters()
             }
 
             articleList.observe(viewLifecycleOwner){
-                mainViewModel.refreshfilters()
+                mainViewModel.refreshFilters()
             }
-
 
             articleIdClicked.observe(viewLifecycleOwner)
             { articleId ->
@@ -141,7 +130,14 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun checkCurrentCategory(checkedId: Int) {
+    private fun checkIfFavoritesIsChecked() {
+        if(binding.cbMainFavorites.isChecked)
+            mainViewModel.setFilterByFavActivated(true)
+        else
+            mainViewModel.setFilterByFavActivated(false)
+    }
+
+    private fun checkCurrentCategoryChecked(checkedId: Int) {
         with(binding) {
             when (checkedId) {
                 rbSport.id -> mainViewModel.setCurrentCategory(CATEGORY_SPORT)
@@ -160,16 +156,13 @@ class MainFragment : Fragment() {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         mainViewModel.refreshArticles()
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

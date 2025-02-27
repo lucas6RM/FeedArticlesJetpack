@@ -53,16 +53,12 @@ class CreaArticleViewModel @Inject constructor(
             when{
                 responseAddNewArticle == null -> Log.e(ContentValues.TAG,"Pas de reponse du serveur")
                 responseAddNewArticle.isSuccessful && body != null -> {
+                    if (body.status.toString() == "1")
+                        _isResponseCorrect.value = true
                     _messageFromAddNewArticleResponse.value = body.status.toString()
-                    _isResponseCorrect.value = true
                 }
                 else -> responseAddNewArticle.errorBody()?.let { Log.e(ContentValues.TAG, it.string()) }
             }
         }
     }
-
-    fun resetIsResponseCorrect() {
-        _isResponseCorrect.value = false
-    }
-
 }

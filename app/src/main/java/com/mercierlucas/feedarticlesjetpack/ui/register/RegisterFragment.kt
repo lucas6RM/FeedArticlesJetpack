@@ -36,7 +36,6 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentRegisterBinding.inflate(inflater,container, false)
         return binding.root
     }
@@ -48,10 +47,10 @@ class RegisterFragment : Fragment() {
         registerViewModel.apply {
             messageFromRegisterResponse.observe(viewLifecycleOwner){
                 when(it){
-                     "5"  -> context?.showToast("login déjà utilisé")
-                     "1"  -> context?.showToast("nouveau compte créé")
-                     "0"  -> context?.showToast("nouveau compte non créé")
-                    "-1"  -> context?.showToast("problème de paramètre")
+                     "5"  -> context?.showToast(getString(R.string.login_already_used))
+                     "1"  -> context?.showToast(getString(R.string.new_account_created))
+                     "0"  -> context?.showToast(getString(R.string.new_account_not_created))
+                    "-1"  -> context?.showToast(getString(R.string.error_param))
                     else  -> return@observe
                 }
             }
@@ -60,8 +59,6 @@ class RegisterFragment : Fragment() {
                     navController.navigate(R.id.action_registerFragment_to_mainFragment)
                 }
             }
-
-
         }
 
         binding.btnRegister.setOnClickListener{
@@ -73,12 +70,10 @@ class RegisterFragment : Fragment() {
                     if (login.isNotEmpty() && password.isNotEmpty())
                         registerViewModel.registerIn(RegisterDto( login,password))
                     else
-                        context?.showToast("login ou mot de passe vide")
+                        context?.showToast(getString(R.string.login_or_password_empty))
                 }
                 else
-                    context?.showToast("erreur sur la confirmation de mot de passe")
-
-
+                    context?.showToast(getString(R.string.error_on_confirmed_password))
             }
         }
     }
@@ -87,5 +82,4 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
