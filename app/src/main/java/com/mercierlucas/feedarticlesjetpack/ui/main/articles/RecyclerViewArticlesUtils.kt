@@ -41,7 +41,7 @@ class ArticleAdapter(val onArticleClicked : (Long, Long) -> Unit) : ListAdapter<
                 Picasso.get()
                     .load(article.urlImage.ifEmpty { "image vide" })
                     .placeholder(R.drawable.feedarticles_logo)
-                    .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                    .error(R.drawable.feedarticles_logo)
                     .into(this.ivItemView)
             }
             tvItemViewArticleTitle.text = article.titre

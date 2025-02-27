@@ -23,7 +23,7 @@
     <string name="image_url">Image URL</string>
     <string name="details_article">Détails Article</string>
     <string name="created_on">Créé le %s</string>
-    <string name="category_s">Catégorie : %s</string>
+    <string name="category_s">Catégorie : Inconnue</string>
     <string name="mid_size_title">Un titre qui peut être moyennement long</string>
     <string name="large_size_description">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop "</string>
     <string name="back">Retour</string>

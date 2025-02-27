@@ -54,7 +54,10 @@ class MainViewModel @Inject constructor(
 
 
     init {
+
         refreshArticles()
+
+
         _articleFilteredList.value = _articleList.value
         _articleIdClicked.value = 0L
         _currentFragment.value = null

@@ -57,8 +57,7 @@ class CreaArticleFragment : Fragment() {
             }
             isResponseCorrect.observe(viewLifecycleOwner){
                 if(it){
-                    navController.navigate(R.id.action_creaArticleFragment_to_mainFragment)
-                    creaArticleViewModel.resetIsResponseCorrect()
+                    navController.popBackStack()
                 }
             }
         }
@@ -94,7 +93,7 @@ class CreaArticleFragment : Fragment() {
                         .get()
                         .load(imageUrl)
                         .placeholder(R.drawable.feedarticles_logo)
-                        .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                        .error(R.drawable.feedarticles_logo)
                         .into(ivCreaArticle)
             }
         }

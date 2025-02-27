@@ -13,10 +13,18 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in" />
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -25,10 +33,19 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -37,7 +54,11 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -46,26 +67,41 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_detailsArticleFragment"
-            app:destination="@id/detailsArticleFragment" />
+            app:destination="@id/detailsArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/mainFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_editArticleFragment"
-            app:destination="@id/editArticleFragment" />
+            app:destination="@id/editArticleFragment"
+            app:popUpTo="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_creaArticleFragment"
-            app:destination="@id/creaArticleFragment" />
+            app:destination="@id/creaArticleFragment"
+            app:popUpTo="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/creaArticleFragment"
         android:name="com.mercierlucas.feedarticlesjetpack.ui.create.article.CreaArticleFragment"
         android:label="fragment_crea_article"
-        tools:layout="@layout/fragment_crea_article" >
-        <action
-            android:id="@+id/action_creaArticleFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_crea_article" />
     <fragment
         android:id="@+id/detailsArticleFragment"
         android:name="com.mercierlucas.feedarticlesjetpack.ui.details.article.DetailsArticleFragment"
@@ -75,18 +111,12 @@
             android:name="articleId"
             app:argType="long"
             android:defaultValue="0L" />
-        <action
-            android:id="@+id/action_detailsArticleFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/editArticleFragment"
         android:name="com.mercierlucas.feedarticlesjetpack.ui.edit.article.EditArticleFragment"
         android:label="fragment_edit_article"
         tools:layout="@layout/fragment_edit_article" >
-        <action
-            android:id="@+id/action_editArticleFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
         <argument
             android:name="articleId"
             app:argType="long"

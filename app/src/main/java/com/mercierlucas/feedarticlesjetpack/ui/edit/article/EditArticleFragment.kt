@@ -84,8 +84,7 @@ class EditArticleFragment : Fragment() {
             }
             isResponseCorrect.observe(viewLifecycleOwner){
                 if(it){
-                    navController.navigate(R.id.action_editArticleFragment_to_mainFragment)
-                    editViewModel.resetIsResponseCorrect()
+                    navController.popBackStack()
                 }
             }
 
@@ -99,7 +98,7 @@ class EditArticleFragment : Fragment() {
                             .get()
                             .load(articleToEdit.urlImage)
                             .placeholder(R.drawable.feedarticles_logo)
-                            .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                            .error(R.drawable.feedarticles_logo)
                             .into(ivEditArticle)
                     when (articleToEdit.categorie) {
                         CATEGORY_SPORT  -> rbEditArtSport.isChecked  = true

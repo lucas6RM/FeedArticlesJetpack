@@ -53,7 +53,6 @@ class LoginFragment : Fragment() {
             isResponseCorrect.observe(viewLifecycleOwner){
                 if(it){
                     navController.navigate(R.id.action_loginFragment_to_mainFragment)
-                    loginViewModel.resetIsResponseCorrect()
                 }
             }
         }

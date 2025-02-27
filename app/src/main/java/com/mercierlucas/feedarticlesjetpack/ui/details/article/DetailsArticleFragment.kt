@@ -85,7 +85,7 @@ class DetailsArticleFragment : Fragment() {
                             .get()
                             .load(article.urlImage)
                             .placeholder(R.drawable.feedarticles_logo)
-                            .error(com.google.android.material.R.drawable.mtrl_ic_error)
+                            .error(R.drawable.feedarticles_logo)
                             .into(ivDetailsArticle)
                     tvDetailsArticleDescription.text = article.descriptif
                     if (article.isFav == 1)
@@ -105,7 +105,7 @@ class DetailsArticleFragment : Fragment() {
                     }
                 }
                 btnDetailsBack.setOnClickListener {
-                    navController.navigate(R.id.action_detailsArticleFragment_to_mainFragment)
+                    navController.popBackStack()
                 }
             }
 

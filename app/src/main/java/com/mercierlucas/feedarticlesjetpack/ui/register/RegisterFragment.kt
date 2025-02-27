@@ -58,7 +58,6 @@ class RegisterFragment : Fragment() {
             isResponseCorrect.observe(viewLifecycleOwner){
                 if(it){
                     navController.navigate(R.id.action_registerFragment_to_mainFragment)
-                    registerViewModel.resetIsResponseCorrect()
                 }
             }
 

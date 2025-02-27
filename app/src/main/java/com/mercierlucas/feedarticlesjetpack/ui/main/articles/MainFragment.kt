@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -21,6 +21,7 @@ import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_MANGA
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_SPORT
 import com.mercierlucas.feedarticlesjetpack.utils.CATEGORY_TOUS
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -41,13 +42,14 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater,container,false)
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
-
 
 
         articleAdapter = ArticleAdapter (onArticleClicked = {articleId,userId ->
@@ -68,13 +70,7 @@ class MainFragment : Fragment() {
 
 
             rgMain.setOnCheckedChangeListener{ _,checkedId ->
-                when(checkedId){
-                    rbSport.id  -> mainViewModel.setCurrentCategory(CATEGORY_SPORT)
-                    rbManga.id  -> mainViewModel.setCurrentCategory(CATEGORY_MANGA)
-                    rbDivers.id -> mainViewModel.setCurrentCategory(CATEGORY_DIVERS)
-                    rbTous.id   -> mainViewModel.setCurrentCategory(CATEGORY_TOUS)
-                    else -> {}
-                }
+                checkCurrentCategory(checkedId)
             }
 
             cbMainFavorites.setOnCheckedChangeListener{ _,_ ->
@@ -113,10 +109,14 @@ class MainFragment : Fragment() {
             currentCategory.observe(viewLifecycleOwner){
                 mainViewModel.refreshfilters()
             }
+
             isFilterFavActivated.observe(viewLifecycleOwner){
                 mainViewModel.refreshfilters()
             }
 
+            articleList.observe(viewLifecycleOwner){
+                mainViewModel.refreshfilters()
+            }
 
 
             articleIdClicked.observe(viewLifecycleOwner)
@@ -138,8 +138,17 @@ class MainFragment : Fragment() {
                     mainViewModel.resetCurrentFragment()
                 }
             }
-            articleList.observe(viewLifecycleOwner){
-                mainViewModel.resetfilteredArticles()
+        }
+    }
+
+    private fun checkCurrentCategory(checkedId: Int) {
+        with(binding) {
+            when (checkedId) {
+                rbSport.id -> mainViewModel.setCurrentCategory(CATEGORY_SPORT)
+                rbManga.id -> mainViewModel.setCurrentCategory(CATEGORY_MANGA)
+                rbDivers.id -> mainViewModel.setCurrentCategory(CATEGORY_DIVERS)
+                rbTous.id -> mainViewModel.setCurrentCategory(CATEGORY_TOUS)
+                else -> {}
             }
         }
     }
@@ -151,9 +160,10 @@ class MainFragment : Fragment() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
-        refreshMainMenu()
+        mainViewModel.refreshArticles()
     }
 
 
