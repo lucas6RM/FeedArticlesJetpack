@@ -61,14 +61,14 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        binding.btnRegister.setOnClickListener{
-            binding.let{
-                login = it.etRegisterEnterLogin.text.toString().trim()
-                password = it.etRegisterEnterPassword.text.toString().trim()
-                confirmedPassword = it.etRegisterConfirmPassword.text.toString().trim()
+        with(binding){
+            btnRegister.setOnClickListener{
+                login = etRegisterEnterLogin.text.toString().trim()
+                password = etRegisterEnterPassword.text.toString().trim()
+                confirmedPassword = etRegisterConfirmPassword.text.toString().trim()
                 if(password == confirmedPassword){
                     if (login.isNotEmpty() && password.isNotEmpty())
-                        registerViewModel.registerIn(RegisterDto( login,password))
+                        registerViewModel.registerIn(RegisterDto(login,password))
                     else
                         context?.showToast(getString(R.string.login_or_password_empty))
                 }

@@ -57,19 +57,18 @@ class LoginFragment : Fragment() {
             }
         }
 
-        binding.btnLogin.setOnClickListener{
-            binding.let {
-                login = it.etLoginEnterLogin.text.toString().trim()
-                password = it.etLoginEnterPassword.text.toString().trim()
-                if(login.isNotEmpty() && password.isNotEmpty())
-                    loginViewModel.signIn(login,password)
-                else
-                    context?.showToast(getString(R.string.login_or_password_empty))
+        with(binding){
+            btnLogin.setOnClickListener{
+                    login = etLoginEnterLogin.text.toString().trim()
+                    password = etLoginEnterPassword.text.toString().trim()
+                    if(login.isNotEmpty() && password.isNotEmpty())
+                        loginViewModel.signIn(login,password)
+                    else
+                        context?.showToast(getString(R.string.login_or_password_empty))
             }
-        }
-
-        binding.tvLoginGoRegister.setOnClickListener{
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+            tvLoginGoRegister.setOnClickListener{
+                navController.navigate(R.id.action_loginFragment_to_registerFragment)
+            }
         }
     }
 
